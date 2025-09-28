@@ -3,7 +3,6 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
-  advance_water_drop_nav_bar
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST

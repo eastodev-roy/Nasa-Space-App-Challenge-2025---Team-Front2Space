@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../Nav_bar/view/nav_bar.dart';
-import '../../Nav_bar/view/new_nav_bar.dart';
 
 class SplashScreenController extends GetxController
     with GetSingleTickerProviderStateMixin {
@@ -30,9 +29,9 @@ class SplashScreenController extends GetxController
     animationController.forward();
 
     // Navigate after 3 seconds
-    Future.delayed(const Duration(seconds: 20), () {
-    // Get.to(()=>NavbarView());
-      Get.to(()=>NewNavBar());
+    Future.delayed(const Duration(seconds: 15), () {
+    Get.to(()=>NavBar());
+    //   Get.to(()=>NewNavBar());
     });
   }
 

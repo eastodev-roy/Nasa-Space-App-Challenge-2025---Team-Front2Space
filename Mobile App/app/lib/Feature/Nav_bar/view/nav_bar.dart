@@ -1,90 +1,75 @@
-import 'dart:developer';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-import '../controller/nav_bar_controller.dart';
+import '../../UI/Home_page/view/home_page.dart';
 
+class NavBar extends StatelessWidget {
+   NavBar({super.key});
+  int index =0;
+  final screen=[
+    HomePage(),
+    SearchPage(),
+    FavoritePage(),
+    FavoritePage(),
+    FavoritePage(),
 
-class NavbarView extends StatelessWidget {
-  final NavBarController controller = Get.put(NavBarController());
-
-  final List<Widget> pages = [
-    // HomePage(),
-    // JobPage(),
-    // CommunityPage(),
-    // SkillDevelopmentPage(),
-    // ProfilePage(),
   ];
+   @override
+  Widget build(BuildContext context) {
 
-  final List<String> labels = [
-    'Home',
-    'Visualization ',
-    'Shark',
-    'Skill Development',
-    'Profile',
-  ];
 
-  /// Updated to hold pairs: [selectedIcon, unselectedIcon]
-  final List<List<String>> iconPairs = [
-    // [ImagePath.activeHome, ImagePath.inactiveHome],
-    // [ImagePath.activeJob, ImagePath.inactiveJob],
-    // [ImagePath.activeCommunity, ImagePath.inactiveCommunity],
-    // [ImagePath.activeSkillDevelopment, ImagePath.inactiveSkillDevelopment],
-    // [ImagePath.activeProfile, ImagePath.inactiveProfile],
-  ];
+    final items = <Widget>[
+      const Icon(Icons.home, size: 30,color: Colors.blueAccent,),
+      const Icon(Icons.search, size: 30,color: Colors.blueAccent,),
+      const Icon(Icons.favorite, size: 30,color: Colors.blueAccent,),
+      const Icon(Icons.safety_check, size: 30,color: Colors.blueAccent,),
+      const Icon(Icons.settings, size: 30,color: Colors.blueAccent,),
+    ];
 
-  NavbarView({super.key});
+    return Container(
+      color: Colors.tealAccent.withOpacity(0.05),
+      child: Scaffold(
+        extendBody: true,
+        backgroundColor: Colors.cyanAccent,
+
+        bottomNavigationBar: CurvedNavigationBar(
+          color: Colors.tealAccent.withOpacity(0.05),
+          backgroundColor: Colors.transparent,
+
+          items: items,
+          height: 60,
+          index: index, // Default active tab
+          onTap: (i) {
+
+          },
+        ),
+        body: screen[index],
+        // body:Image.asset('assets/shark2.jpg',height: double.infinity,width: double.infinity,fit: BoxFit.cover,),
+      ),
+    );
+  }
+}
+
+
+class SearchPage extends StatelessWidget {
+  const SearchPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Obx(() => pages.elementAt(controller.selectedIndex.value)),
-      bottomNavigationBar: _buildBottomNavigationBar(),
-    );
-  }
-
-  Obx _buildBottomNavigationBar() {
-    return Obx(() {
-      return BottomNavigationBar(
-        backgroundColor: Colors.white,
-        type: BottomNavigationBarType.fixed,
-        currentIndex: controller.selectedIndex.value,
-        onTap: (index) {
-          log('selected index: $index');
-          controller.changeIndex(index);
-        },
-        items: List.generate(
-          labels.length,
-              (index) => _buildNavItem(
-            iconPairs[index][0], // selected icon
-            iconPairs[index][1], // unselected icon
-            labels[index],
-            index,
-          ),
-        ),
-      );
-    });
-  }
-
-  BottomNavigationBarItem _buildNavItem(
-      String selectedIconPath,
-      String unselectedIconPath,
-      String label,
-      int index,
-      ) {
-    return BottomNavigationBarItem(
-      icon: Obx(() {
-        final isSelected = controller.selectedIndex.value == index;
-        // log(
-        //   'Loading icon: ${isSelected ? selectedIconPath : unselectedIconPath}',
-        // );
-        return Image.asset(
-          isSelected ? selectedIconPath : unselectedIconPath,
-          height: 30,
-          width: 30,
-        );
-      }),
-      label: label,
+      backgroundColor: Colors.red,
     );
   }
 }
+
+class FavoritePage extends StatelessWidget {
+  const FavoritePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.indigo,
+    );
+  }
+}
+
