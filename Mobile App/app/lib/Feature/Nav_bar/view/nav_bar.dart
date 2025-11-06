@@ -13,7 +13,7 @@ class NavBar extends StatelessWidget {
     FavoritePage(),
     FavoritePage(),
 
-  ];
+  ];gi
    @override
   Widget build(BuildContext context) {
 
